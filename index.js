@@ -1,3 +1,10 @@
+module.exports = animate
+
+var events = animate.events = {
+  BEFORE_TRANSITION: 'animate:before',
+  AFTER_TRANSITION: 'after:after'
+}
+
 function animate (opts) {
   opts = opts || {}
   var _animations = opts.animations
@@ -12,15 +19,15 @@ function animate (opts) {
 
       emitter.prependListener(state.events.NAVIGATE, function () {
         var elements = beforeElements.length > 0 ? beforeElements : _elements
-        emitter.emit('before-transition', elements, _animations)
+        emitter.emit(events.BEFORE_TRANSITION, elements, _animations)
       })
 
       emitter.on(state.events.NAVIGATE, function () {
         var elements = afterElements.length > 0 ? afterElements : _elements
-        emitter.emit('after-transition', elements, _animations)
+        emitter.emit(events.AFTER_TRANSITION, elements, _animations)
       })
 
-      emitter.prependListener('before-transition', function (elements, transitions) {
+      emitter.prependListener(events.BEFORE_TRANSITION, function (elements, transitions) {
         if (elements.length > 0) {
           Array.prototype.forEach.call(elements, function (element) {
             var _before = element.dataset['before-transition'] || opts.before
@@ -30,7 +37,7 @@ function animate (opts) {
         }
       })
 
-      emitter.prependListener('after-transition', function (elements, transitions) {
+      emitter.prependListener(events.AFTER_TRANSITION, function (elements, transitions) {
         if (elements.length > 0) {
           Array.prototype.forEach.call(elements, function (element) {
             var _after = element.dataset['after-transition'] || opts.after
@@ -44,4 +51,3 @@ function animate (opts) {
 }
 
 function noop () {}
-module.exports = animate
