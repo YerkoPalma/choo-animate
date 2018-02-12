@@ -4,7 +4,8 @@
   "description": "add handi animations to choo native events",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard",
+    "start": "budo example.js -p 8080 -H 0.0.0.0 -- -t sheetify"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/YerkoPalma/choo-animate/issues"
   },
-  "homepage": "https://github.com/YerkoPalma/choo-animate#readme"
+  "homepage": "https://github.com/YerkoPalma/choo-animate#readme",
+  "devDependencies": {
+    "animation-toolbox": "^2.1.0",
+    "budo": "^11.1.0",
+    "choo": "^6.7.0",
+    "sheetify": "^7.2.0",
+    "standard": "^10.0.3",
+    "tachyons": "^4.9.1"
+  }
 }
